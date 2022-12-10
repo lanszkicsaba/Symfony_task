@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+ <table id="table" class="table table-striped">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Név</th>
+			<th>Nem</th>
+			<th>Cím</th>
+			<th>Rólam</th>
+			<th>Aktív-e</th>
+            <th colspan="2">Műveletek</th>
+		</tr>
+	</thead>
+	<tbody>
+    {% for user in users %}
+		<tr id="{{ user.id }}">
+			<td>{{user.id}}</td>
+			<td>{{user.name}}</td>
+            {% if  user.gender == 1 %}
+			<td>Férfi</td>
+            {% else %}
+            <td>Nő</td>
+            {% endif %}
+			<td>{{user.address}}</td>
+			<td>{{user.aboutMe}}</td>
+            {% if  user.isActive == 1 %}
+			<td>Aktív</td>
+            {% else %}
+            <td>Nem Aktív</td>
+            {% endif %}
+            <td><button data-id="{{ user.id }}" class="btn btn-primary"><i class="fa fa-trash"></i></button></td>
+            <td><button onclick="location.href='./user-test-form/{{ user.id }}'" class="btn btn-warning"><i class="fa fa-pencil"></i></button></td>
+		</tr>
+    {% endfor %}
+	</tbody>
+</table>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+        <button onclick="location.href='./user-test-form';" type="button" class="btn btn-success">Új felhasználó hozzáadása</button>
+    </div>
+  </div>
+</div>
+</div>
+
+{% block javascripts %}
+    <script src="/delete2.js"></script>  
+{% endblock %}
+
+{% endblock %}
+
